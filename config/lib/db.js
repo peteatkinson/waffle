@@ -5,8 +5,14 @@ const connectionPool = new Pool({connectionString: connectionString})
 
 module.exports = {
     connect: async function() {
-        const client = await connectionPool.connect()
-        return client
+        try {
+            const client = await connectionPool.connect()
+            return client
+        }
+        catch(err) {
+            console.log(`'Postgres failed to connect to the connection pool. \n ${err.stack}`)
+        }
+        
     },
 
     query: async function(command) {
@@ -18,6 +24,4 @@ module.exports = {
             console.log(`Postgres query command threw an error \n ${error.stack}`)
         }
     }
-   
-
 }
