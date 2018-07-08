@@ -1,15 +1,23 @@
-import { Client, Pool } from "pg";
+import { Pool } from "pg";
 const connectionString = process.env.POSTGRES_CONNECTION;
 
-const client = new Client(connectionString)
+const connectionPool = new Pool({connectionString: connectionString})
 
 module.exports = {
-    connect: function() {
-        client.connect();
-        return client;
+    connect: async function() {
+        const client = await connectionPool.connect()
+        return client
     },
-    query: function() {
-        
+
+    query: async function(command) {
+        try {
+            const client = await connect()
+            return await client.query(command)
+        }
+        catch(err) {
+            console.log(`Postgres query command threw an error \n ${error.stack}`)
+        }
     }
+   
 
 }
