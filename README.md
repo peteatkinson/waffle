@@ -1,0 +1,1 @@
+Building this out as a personal open source project, will accept contributions when the repos looking beafy as hell
