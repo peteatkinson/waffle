@@ -12,7 +12,6 @@ module.exports = {
         catch(err) {
             console.log(`'Postgres failed to connect to the connection pool. \n ${err.stack}`)
         }
-        
     },
 
     query: async function(command) {
